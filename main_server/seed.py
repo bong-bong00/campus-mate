@@ -28,12 +28,12 @@ def seed_if_empty():
             return
         today = date.today()
         sources = ["linkareer", "thinkgood", "campuspick"]
-        for i, (title, host, cat, days, elig, prize, summary) in enumerate(SAMPLES, 1):
+        for number, (title, host, category, days_left, eligibility, prize, summary) in enumerate(SAMPLES, 1):
             db.add(models.Contest(
-                source=sources[i % 3], source_url=f"https://example.com/sample/{i}",
-                title=title, host=host, category=cat,
-                start_date=today - timedelta(days=7), deadline=today + timedelta(days=days),
-                eligibility=elig, prize=prize, summary=summary,
-                organizer="샘플운영사무국" if i % 2 else None,
-                apply_url=f"https://example.com/apply/{i}"))
+                source=sources[number % 3], source_url=f"https://example.com/sample/{number}",
+                title=title, host=host, category=category,
+                start_date=today - timedelta(days=7), deadline=today + timedelta(days=days_left),
+                eligibility=eligibility, prize=prize, summary=summary,
+                organizer="샘플운영사무국" if number % 2 else None,
+                apply_url=f"https://example.com/apply/{number}"))
         db.commit()

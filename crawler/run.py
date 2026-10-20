@@ -7,39 +7,41 @@ from sqlalchemy import select
 
 from main_server import models
 from main_server.db import Base, SessionLocal, engine
-from .sites import campuspick, linkareer, thinkgood
+from .sites.campuspick import CampuspickCrawler
+from .sites.linkareer import LinkareerCrawler
+from .sites.thinkgood import ThinkgoodCrawler
 
-CRAWLERS = [linkareer.Crawler, thinkgood.Crawler, campuspick.Crawler]
+CRAWLER_CLASSES = [LinkareerCrawler, ThinkgoodCrawler, CampuspickCrawler]
 
 
-def save(items) -> int:
-    n = 0
+def save_contests(raw_contests) -> int:
+    saved_count = 0
     with SessionLocal() as db:
-        for it in items:
-            if db.scalar(select(models.Contest).where(models.Contest.source_url == it.source_url)):
+        for raw in raw_contests:
+            if db.scalar(select(models.Contest).where(models.Contest.source_url == raw.source_url)):
                 continue   # 이미 있는 공고 (사이트 간 중복 병합은 4.3 작업)
-            db.add(models.Contest(source=it.source, source_url=it.source_url, title=it.title,
-                                  host=it.host, organizer=it.organizer, category=it.category,
-                                  deadline=it.deadline, apply_url=it.apply_url, poster_url=it.poster_url))
-            n += 1
+            db.add(models.Contest(source=raw.source, source_url=raw.source_url, title=raw.title,
+                                  host=raw.host, organizer=raw.organizer, category=raw.category,
+                                  deadline=raw.deadline, apply_url=raw.apply_url, poster_url=raw.poster_url))
+            saved_count += 1
         db.commit()
-    return n
+    return saved_count
 
 
 def main():
     Base.metadata.create_all(engine)
-    for cls in CRAWLERS:
-        c = cls()
+    for crawler_class in CRAWLER_CLASSES:
+        crawler = crawler_class()
         try:
-            items = c.crawl()
-            n = save(items)
+            raw_contests = crawler.crawl()
+            saved_count = save_contests(raw_contests)
             result = "ok"
-        except Exception as e:  # 한 사이트가 실패해도 나머지는 계속
-            n, result = 0, f"error: {type(e).__name__}"
+        except Exception as error:  # 한 사이트가 실패해도 나머지는 계속
+            saved_count, result = 0, f"error: {type(error).__name__}"
         with SessionLocal() as db:
-            db.add(models.CrawlLog(source=c.source, collected=n, result=result))
+            db.add(models.CrawlLog(source=crawler.source, collected=saved_count, result=result))
             db.commit()
-        print(f"[{c.source}] 새 공고 {n}건 ({result})")
+        print(f"[{crawler.source}] 새 공고 {saved_count}건 ({result})")
 
 
 if __name__ == "__main__":

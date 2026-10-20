@@ -29,16 +29,16 @@ class BaseCrawler:
 
     def __init__(self):
         self.client = httpx.Client(headers={"User-Agent": USER_AGENT}, timeout=20, follow_redirects=True)
-        self._last = 0.0
+        self._last_request_time = 0.0
 
     def fetch(self, url: str) -> str:
-        wait = REQUEST_DELAY_SEC - (time.time() - self._last)
-        if wait > 0:
-            time.sleep(wait)
-        res = self.client.get(url)
-        self._last = time.time()
-        res.raise_for_status()
-        return res.text
+        wait_sec = REQUEST_DELAY_SEC - (time.time() - self._last_request_time)
+        if wait_sec > 0:
+            time.sleep(wait_sec)
+        response = self.client.get(url)
+        self._last_request_time = time.time()
+        response.raise_for_status()
+        return response.text
 
     def crawl(self) -> list[RawContest]:
         raise NotImplementedError

@@ -2,7 +2,7 @@
 from ..base import BaseCrawler, RawContest
 
 
-class Crawler(BaseCrawler):
+class ThinkgoodCrawler(BaseCrawler):
     source = "thinkgood"
     list_url = ""   # TODO: 공모전 목록 페이지 주소
 

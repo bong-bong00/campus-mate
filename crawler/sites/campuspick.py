@@ -5,7 +5,7 @@
 from ..base import BaseCrawler, RawContest
 
 
-class Crawler(BaseCrawler):
+class CampuspickCrawler(BaseCrawler):
     source = "campuspick"
 
     def crawl(self) -> list[RawContest]:

@@ -89,3 +89,17 @@
 ## 작업 방식
 - 작업을 마치면 이 파일의 WBS 상태 칸을 갱신할 것
 - 큰 변경 전에는 무엇을 바꿀지 먼저 짧게 설명할 것
+
+## 이름 규칙 (PEP 8 기준, 반드시 지킬 것)
+| 대상 | 규칙 | 예 |
+| --- | --- | --- |
+| 변수·함수·매개변수·모듈 | snake_case (소문자 + 밑줄) | `days_left`, `save_contests()` |
+| 클래스 | PascalCase (단어 첫 글자 대문자) | `LinkareerCrawler`, `ContestOut` |
+| 상수 | UPPER_SNAKE_CASE | `REQUEST_DELAY_SEC`, `SOURCE_NAMES` |
+| 파일 안에서만 쓰는 함수·변수 | 앞에 밑줄 하나 | `_extract_keywords()` |
+- 함수는 동사로 시작: `get_` `list_` `add_` `delete_` `save_` `show_` `format_` 등. 화면 함수는 `~_page`
+- 참/거짓 값은 `is_` `has_`로 시작: `is_port_in_use()`, `is_retried`
+- 여러 개를 담는 변수는 복수형: `contests`, `categories`
+- 한두 글자·줄임말 금지(`c`, `n`, `kw`, `res` → `contest`, `days_left`, `keyword`, `response`). 예외: `db`(DB 세션), `id`, `url`
+- 같은 것은 어디서나 같은 이름: 공고 하나 `contest`, 검색어 `keyword`, 캘린더 등록 기록 `entry`
+- DB 칸 이름(models.py)은 바꾸면 reset_db가 필요하므로 함부로 바꾸지 않음

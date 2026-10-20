@@ -65,7 +65,7 @@ python -m web.main                                 # 3. 웹 화면
 | 3.4 스케줄러 | `crawler/run.py` | 하루 1~2회 자동 실행 |
 | 4.1, 4.4 에이전트 | `ai_server/app.py`의 `run_agent` | 임시 키워드 검색을 LLM 도구 호출 반복으로 교체. 도구 정의는 `tools.TOOL_SPECS` |
 | 4.2 수집 에이전트 | `crawler/run.py`의 `save` | `page_text`를 AI 서버로 보내 핵심 추출·요약 후 저장 |
-| 5.1~5.2 구글 캘린더 | `main_server/app.py`의 `add_calendar` | 구글 로그인, 일정 생성 후 `google_event_id` 저장 |
+| 5.1~5.2 구글 캘린더 | `main_server/app.py`의 `add_calendar_entry` | 구글 로그인, 일정 생성 후 `google_event_id` 저장 |
 
 ## 수집 운영 원칙
 
