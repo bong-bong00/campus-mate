@@ -6,7 +6,7 @@
 대화와 문서는 한국어로.
 
 ## 개발 환경 (사용자 PC)
-- Windows, VS Code, PowerShell 터미널, 프로젝트 폴더 `C:\Users\stu_35\Documents\GitHub\campus-mate` (GitHub 저장소 bong-bong00/campus_mate)
+- Windows, VS Code, PowerShell 터미널, 프로젝트 폴더 `C:\Users\stu_35\Documents\GitHub\campus-mate` (GitHub 저장소 bong-bong00/campus-mate)
 - Python 가상환경 `venv` (명령 실행 전 `venv\Scripts\activate`)
 - MariaDB 로컬 설치, DB 이름 `campusmate`(utf8mb4), HeidiSQL로 확인. 연결 정보는 `.env`의 `DATABASE_URL`
 - `.env`에는 DB 비밀번호가 있음. 절대 내용을 출력하거나 다른 파일에 복사하지 말 것
@@ -60,7 +60,7 @@
 ## 일정 (WBS, 평일 기준, 10/19~12/8)
 | 번호 | 작업 | 기간 | 상태(10/20) |
 | --- | --- | --- | --- |
-| 1.1 | 개발 환경 구축 | 10/19 | 완료(Git 저장소 bong-bong00/campus_mate 연결) |
+| 1.1 | 개발 환경 구축 | 10/19 | 완료(Git 저장소 bong-bong00/campus-mate 연결) |
 | 1.2 | 상세 페이지 수집 방식 확인 | 10/19 | 완료(캠퍼스픽 10/20 확인) |
 | 1.3 | DB 테이블 설계 | 10/20 | 코드 반영 완료, 테이블 정의서 문서 남음 |
 | 1.4 | API 명세 작성 | 10/21 | 코드에 API 있음, 문서 남음 |
