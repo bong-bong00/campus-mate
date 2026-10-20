@@ -1,0 +1,8 @@
+nicegui==3.17.1
+fastapi==0.143.2
+uvicorn==0.54.0
+SQLAlchemy==2.1.4
+PyMySQL==1.2.3
+httpx==0.28.1
+python-dotenv==1.2.4
+# 캠퍼스픽 크롤러 작업(11/5) 때 추가: playwright
