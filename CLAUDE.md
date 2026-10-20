@@ -6,7 +6,7 @@
 대화와 문서는 한국어로.
 
 ## 개발 환경 (사용자 PC)
-- Windows, VS Code, PowerShell 터미널, 프로젝트 폴더 `C:\Users\stu_35\Documents\campus-mate`
+- Windows, VS Code, PowerShell 터미널, 프로젝트 폴더 `C:\Users\stu_35\Documents\GitHub\campus-mate` (GitHub 저장소 bong-bong00/campus_mate)
 - Python 가상환경 `venv` (명령 실행 전 `venv\Scripts\activate`)
 - MariaDB 로컬 설치, DB 이름 `campusmate`(utf8mb4), HeidiSQL로 확인. 연결 정보는 `.env`의 `DATABASE_URL`
 - `.env`에는 DB 비밀번호가 있음. 절대 내용을 출력하거나 다른 파일에 복사하지 말 것
